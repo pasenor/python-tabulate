@@ -6,6 +6,7 @@ import tabulate
 import asciitable
 import prettytable
 import texttable
+import terminaltables
 import sys
 import codecs
 from platform import python_version_tuple
@@ -20,6 +21,7 @@ import tabulate
 import asciitable
 import prettytable
 import texttable
+import terminaltables
 
 
 import platform
@@ -67,6 +69,10 @@ def run_tabletext(table):
     return tabletext.to_text(table)
 
 
+def run_terminaltables(table):
+    return terminaltables.AsciiTable(table).table
+
+
 def run_tabulate(table, widechars=False):
     tabulate.WIDE_CHARS_MODE = tabulate.wcwidth is not None and widechars
     return tabulate.tabulate(table)
@@ -79,6 +85,7 @@ methods = [
     ("csv to StringIO", "csv_table(table)"),
     ("asciitable (%s)" % asciitable.__version__, "run_asciitable(table)"),
     ("tabulate (%s)" % tabulate.__version__, "run_tabulate(table)"),
+    ("terminaltable (%s)" % terminaltables.__version__, "run_terminaltables(table)"),
     (
         "tabulate (%s, WIDE_CHARS_MODE)" % tabulate.__version__,
         "run_tabulate(table, widechars=True)",
